@@ -12,19 +12,17 @@ const Slider = () => {
     );
 
     const nextCard = () => {
-        setIndex(
-            (prevIndex) =>
-                prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0
-            //Cette fonction met à jour l'index de l'image suivante à afficher.Si l'index actuel est inférieur à la longueur du tableau byDateDesc moins 1, l'index est incrémenté de 1. Sinon, l'index est réinitialisé à 0 pour revenir au début du slider//
+        setIndex((prevIndex) =>
+            prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0
         );
     };
 
     useEffect(() => {
-        // Démarre un intervalle pour changer automatiquement les images toutes les 5 secondes
         const intervalId = setInterval(nextCard, 5000);
-        // Nettoie l'intervalle lorsque le composant est démonté ou lorsque les dépendances changent
         return () => clearInterval(intervalId);
     }, [index, byDateDesc]);
+    // Nettoie l'intervalle lorsque le composant est démonté ou lorsque les dépendances changent
+    // Démarre un intervalle pour changer automatiquement les images toutes les 5 secondes
 
     return (
         <div className="SlideCardList">
@@ -48,10 +46,11 @@ const Slider = () => {
                         <div className="SlideCard__pagination">
                             {byDateDesc.map((_, radioIdx) => (
                                 <input
-                                    key={`${event.id}`}
+                                    key={`radio-${radioIdx}`}
                                     type="radio"
+                                    readOnly
                                     name="radio-button"
-                                    checked={idx === radioIdx}
+                                    checked={index === radioIdx}
                                 />
                             ))}
                         </div>

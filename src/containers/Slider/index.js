@@ -25,45 +25,44 @@ const Slider = () => {
     // Démarre un intervalle pour changer automatiquement les images toutes les 5 secondes
 
     return (
-        <>
-            <div className="SlideCardList">
-                {byDateDesc?.map((event, idx) => {
-                    const eventDate = new Date(event.date); // Déplacer ici pour chaque itération
-                    return (
-                        <div key={event.title}>
-                            <div
-                                className={`SlideCard SlideCard--${
-                                    index === idx ? "display" : "hide"
-                                }`}
-                            >
-                                <img src={event.cover} alt="forum" />
-                                <div className="SlideCard__descriptionContainer">
-                                    <div className="SlideCard__description">
-                                        <h3>{event.title}</h3>
-                                        <p>{event.description}</p>
-                                        <div>{getMonth(eventDate)}</div>{" "}
-                                        {/* Utiliser eventDate ici */}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="SlideCard__paginationContainer">
-                                <div className="SlideCard__pagination">
-                                    {byDateDesc.map((_, radioIdx) => (
-                                        <input
-                                            key={`radio-${radioIdx}`}
-                                            type="radio"
-                                            readOnly
-                                            name="radio-button"
-                                            checked={index === radioIdx}
-                                        />
-                                    ))}
+        <div className="SlideCardList">
+            {byDateDesc?.map((event) => {
+                const eventDate = new Date(event.date); // Déplacer ici pour chaque itération
+                return (
+                    <div key={event.title}>
+                        <div
+                            className={`SlideCard SlideCard--${
+                                index === byDateDesc.indexOf(event)
+                                    ? "display"
+                                    : "hide"
+                            }`}
+                        >
+                            <img src={event.cover} alt="forum" />
+                            <div className="SlideCard__descriptionContainer">
+                                <div className="SlideCard__description">
+                                    <h3>{event.title}</h3>
+                                    <p>{event.description}</p>
+                                    <div>{getMonth(eventDate)}</div> {}
                                 </div>
                             </div>
                         </div>
-                    );
-                })}
-            </div>
-        </>
+                        <div className="SlideCard__paginationContainer">
+                            <div className="SlideCard__pagination">
+                                {byDateDesc.map((_, radioIdx) => (
+                                    <input
+                                        key={`${_.title}`} // Utilisation de l'index comme clé
+                                        type="radio"
+                                        readOnly
+                                        name="radio-button"
+                                        checked={index === radioIdx}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
     );
 };
 

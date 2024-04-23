@@ -69,7 +69,7 @@ const EventList = () => {
                         {[...Array(pageNumber || 0)].map((_, n) => (
                             // eslint-disable-next-line react/no-array-index-key
                             <a
-                                key={n}
+                                key={`page-number-${n + 1}`} // Utiliser une chaîne constante et la valeur de n pour créer une clé unique
                                 href="#events"
                                 onClick={() => setCurrentPage(n + 1)}
                             >
